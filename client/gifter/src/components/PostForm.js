@@ -9,7 +9,7 @@ const AddPostForm = () => {
     const ImageUrl = useRef()
     const Caption = useRef()
 
-    const handleSubmit = () => {
+    const SubmitPost = () => {
         const Post = {
             Title: Title.current.value,
             ImageUrl: ImageUrl.current.value,
@@ -42,8 +42,8 @@ const AddPostForm = () => {
                     <Input type='text' name='Caption' id='postCaption' innerRef={Caption}
                         placeholder='Caption' className='form-control form-control-sm'></Input>
                 </FormGroup>
-                
-                <Button onClick={handleSubmit}>Submit</Button>
+
+                <Button onClick={SubmitPost}>Submit</Button>
             </Form>
         </div>
     )
