@@ -8,16 +8,17 @@ const PostList = () => {
 
   useEffect(() => {
     getAllPosts();
-  }, [posts]);
+  }, []);
 
   useEffect(() => {
     if (search.current.value !== "") {
         searchPosts(search.current.value)
     }
-    else if(search.current.value !== []) {
+    if(search.current.value !== []) {
         getAllPosts()
     }
 }, [searchTerm])
+
 
   return (
     <>
@@ -45,4 +46,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default PostList; 
