@@ -37,6 +37,7 @@ namespace Gifter.Controllers
         {
             return Ok(_postRepository.GetByUserProfileId(id));
         }
+
         [HttpGet("search")]
         public IActionResult Search(string q, bool sortDesc)
         {
@@ -73,6 +74,5 @@ namespace Gifter.Controllers
             _postRepository.Delete(id);
             return NoContent();
         }
-
     }
 }

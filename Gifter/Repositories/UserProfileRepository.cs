@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Gifter.Data;
+﻿using Gifter.Data;
 using Gifter.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Gifter.Repositories
 {
@@ -17,12 +17,14 @@ namespace Gifter.Repositories
 
         public List<UserProfile> GetAll()
         {
-            return _context.UserProfile.ToList();
+            return _context.UserProfile
+                           .ToList();
         }
 
         public UserProfile GetById(int id)
         {
-            return _context.UserProfile.FirstOrDefault(up => up.Id == id);
+            return _context.UserProfile
+                           .FirstOrDefault(u => u.Id == id);
         }
 
         public void Add(UserProfile userProfile)

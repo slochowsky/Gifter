@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Gifter.Data;
-using Gifter.Repositories;
 using Gifter.Models;
+using Gifter.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gifter.Controllers
 {
@@ -21,21 +26,15 @@ namespace Gifter.Controllers
             return Ok(_commentRepository.GetAll());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("getbypostid/{id}")]
+        public IActionResult GetByPostId(int id)
         {
-            var comment = _commentRepository.GetById(id);
+            var comment = _commentRepository.GetByPostId(id);
             if (comment == null)
             {
                 return NotFound();
             }
             return Ok(comment);
-        }
-
-        [HttpGet("getbypost/{id}")]
-        public IActionResult GetByPost(int id)
-        {
-            return Ok(_commentRepository.GetByPostId(id));
         }
 
         [HttpPost]
@@ -63,6 +62,5 @@ namespace Gifter.Controllers
             _commentRepository.Delete(id);
             return NoContent();
         }
-
     }
 }

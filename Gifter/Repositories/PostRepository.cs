@@ -5,7 +5,6 @@ using Gifter.Data;
 using Gifter.Models;
 using System;
 
-
 namespace Gifter.Repositories
 {
     public class PostRepository
@@ -19,26 +18,34 @@ namespace Gifter.Repositories
 
         public List<Post> GetAll()
         {
-            return _context.Post.Include(p => p.UserProfile).Include(p => p.Comments).ToList();
+            return _context.Post
+                           .Include(p => p.UserProfile)
+                           .Include(c => c.CommentsOnPost)
+                           .ToList();
         }
 
         public Post GetById(int id)
         {
-            return _context.Post.Include(p => p.UserProfile).Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
+            return _context.Post
+                           .Include(p => p.UserProfile)
+                           .Include(c => c.CommentsOnPost)
+                           .FirstOrDefault(p => p.Id == id);
         }
 
         public List<Post> GetByUserProfileId(int id)
         {
             return _context.Post.Include(p => p.UserProfile)
-                            .Include(p => p.Comments)
-                            .Where(p => p.UserProfileId == id)
-                            .OrderBy(p => p.Title)
-                            .ToList();
+                                .Include(c => c.CommentsOnPost)
+                                .Where(p => p.UserProfileId == id)
+                                .OrderBy(p => p.Title)
+                                .ToList();
         }
+
         public List<Post> Search(string criterion, bool sortDescending)
         {
             var query = _context.Post
                                 .Include(p => p.UserProfile)
+                                .Include(c => c.CommentsOnPost)
                                 .Where(p => p.Title.Contains(criterion) || p.Caption.Contains(criterion));
 
             return sortDescending
@@ -51,6 +58,7 @@ namespace Gifter.Repositories
             DateTime dateTime = DateTime.Parse(date);
             var query = _context.Post
                                 .Include(p => p.UserProfile)
+                                .Include(c => c.CommentsOnPost)
                                 .Where(p => p.DateCreated >= dateTime)
                                 .ToList();
             return query;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,6 +25,6 @@ namespace Gifter.Models
 
         public UserProfile UserProfile { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public List<Comment> CommentsOnPost { get; set; }
     }
 }

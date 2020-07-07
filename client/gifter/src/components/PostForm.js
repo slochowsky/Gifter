@@ -10,14 +10,15 @@ const AddPostForm = () => {
     const Caption = useRef()
 
     const SubmitPost = () => {
-        const Post = {
+        const post = {
             Title: Title.current.value,
             ImageUrl: ImageUrl.current.value,
             Caption: Caption.current.value,
             DateCreated: new Date(),
             UserProfileId: 2
         }
-        addPost(Post)
+        console.log(post)
+        addPost(post)
     }
 
     return (
