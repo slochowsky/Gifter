@@ -1,8 +1,10 @@
 import React, { useRef, useContext } from 'react'
 import { PostContext } from "../providers/PostProvider"
 import { Form, FormGroup, Input, Row, FormText, Button } from 'reactstrap'
+import { useHistory } from 'react-router-dom'
 
 const AddPostForm = () => {
+    const history = useHistory()
     const { addPost } = useContext(PostContext)
 
     const Title = useRef()
@@ -18,8 +20,10 @@ const AddPostForm = () => {
             UserProfileId: 2
         }
         console.log(post)
-        addPost(post)
-    }
+        addPost(post).then(() => {
+            history.push("/")
+        }
+        )}
 
     return (
         <div className="container border">
